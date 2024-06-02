@@ -1,9 +1,13 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
 import styles from './ContactForm.module.css';
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+
   const initialValues = {
     name: '',
     number: '',
@@ -26,7 +30,7 @@ const ContactForm = ({ addContact }) => {
       name: values.name,
       number: values.number,
     };
-    addContact(newContact);
+    dispatch(addContact(newContact));
     resetForm();
   };
 
@@ -58,9 +62,7 @@ const ContactForm = ({ addContact }) => {
               type="text"
               id="number"
               name="number"
-              className={
-                errors.number && touched.number ? styles.errorInput : ''
-              }
+              className={errors.number && touched.number ? styles.errorInput : ''}
             />
             <ErrorMessage
               name="number"
@@ -76,3 +78,4 @@ const ContactForm = ({ addContact }) => {
 };
 
 export default ContactForm;
+

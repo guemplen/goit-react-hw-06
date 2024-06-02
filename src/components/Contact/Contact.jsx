@@ -26,3 +26,5 @@ const ContactItem = ({ contact, onDelete }) => {
 };
 
 export default ContactItem;
+
+
